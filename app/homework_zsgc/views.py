@@ -18,5 +18,3 @@ def list():
     return render_template('', shop)
 
 
-def add():
-    pass
