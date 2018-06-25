@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% import 'macro/macro.html' as macro %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid blue;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ul a {
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>体重</th>
+        <th>资金</th>
+        <th>注册时间</th>
+        <th>详细信息</th>
+        <th>操作</th>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.uid }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.weight }}</td>
+            <td>{{ user.money }}</td>
+            <td>{{ user.create_date }}</td>
+            <td>{{ user.msg }}</td>
+            <td>
+                <a href="{{ url_for('user.add') }}">添加</a>
+                <a href="{{ url_for('user.update') }}?uid={{ user.uid }}">修改</a>
+                <a href="#">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% if paginate %}
+    <div>
+        {#
+        1·'user.query_limit' user是蓝图Blueprint的第一个参数name
+        2·query_limit 是views中定义的函数，通常和url_for连用，动态返回url
+#}
+        {{ macro.input(paginate,'user.query_limit') }}
+    </div>
+{% endif %}
+</body>
+</html>

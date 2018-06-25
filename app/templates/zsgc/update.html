@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{{ url_for('user.update') }}?uid={{ user.uid }}" method="post">
+{#    <p>uid<input type="text" name="uid" value="{{ user.uid }}"></p>#}
+    <p>username<input type="text" name="name" value="{{ user.name }}"></p>
+    <p>user_weight<input type="text" name="weight" value="{{ user.weight }}"></p>
+    <p>user_money<input type="text" name="money" value="{{ user.money }}"></p>
+    <p>crete_date<input type="text" name="create_date" value="{{ user.create_date }}"></p>
+    <p>message<input type="text" name="msg" value="{{ user.msg }}"></p>
+    <input type="submit" value="upgrade">
+</form>
+</body>
+</html>

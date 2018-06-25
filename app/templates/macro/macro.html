@@ -1,0 +1,29 @@
+{% macro  input(pagination,endpoint,size=10) %}
+
+    <ul>
+        {#就是函数()#}
+        <!--
+        如果有上一页  比如当前是page=5, page-1
+       <a href="http://127.0.0.1:9000/user/limit/4/10/">4</a>
+       如果没有呢
+       <a href="#">上页</a>
+        -->
+        <li><a href="
+    {% if pagination.has_prev %}
+        {{ url_for(endpoint,page=pagination.page - 1,size=size) }}
+    {% else %}
+        #
+    {% endif %}
+    ">上页</a></li>
+        {% for p in pagination.iter_pages(left_edge=9,right_edge=9) %}
+            {% if  p %}
+                <li><a href="{{ url_for(endpoint,page=p, size=size) }}">{{ p }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a href="{% if pagination.has_next %}
+        {{ url_for(endpoint,page=pagination.page + 1,size=size) }}
+    {% else %}
+        #
+    {% endif %}">下页</a></li>
+    </ul>
+{% endmacro %}
